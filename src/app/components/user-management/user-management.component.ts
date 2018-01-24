@@ -28,7 +28,7 @@ export class UserManagementComponent implements OnInit {
       id: 3, value: "MANAGEMENT", text: "Management"
     },
     {
-      id: 4, value: "DISTRICT", text: "Division"
+      id: 4, value: "DIVISION", text: "Division"
     },
     {
       id: 5, value: "VP-CUSTOMER", text: "VP-Customer"
