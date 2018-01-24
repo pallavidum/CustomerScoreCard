@@ -1,0 +1,56 @@
+<div>
+  <button type="button" class="btn btn-outline-dark" (click)="addUser()">Add User</button>
+</div>
+<table style="max-width: 120%;margin-left: 10%;" class="row-border table table-condensed table-bordered table-custom-hf table-hover hover "
+  name="vp_search_result">
+  <thead>
+    <tr class="pointer">
+      <th>Name</th>
+      <th>Email</th>
+      <th>User Level</th>
+      <th>Permissions</th>
+      <th>Address/Plant Ids</th>
+      <th>EmpId</th>
+      <th>Password</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="pointer" *ngFor="let info of listOfUsers">
+      <td><span>{{info.name}}</span></td>
+      <td><span>{{info.email}}</span></td>
+      <td><span>User Level:{{info.userLevel}}</span></td>
+      <td><span>
+              <div class="row form-group">
+                    <!-- <div class="col">
+                      <div ngbDropdown class="d-inline-block">
+                        <button class="btn btn-outline-primary" id="dropdownBasic1" ngbDropdownToggle>Toggle dropdown</button>
+                        <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                          <button class="dropdown-item" *ngFor="let i of info.permissions">{{i}}</button>
+                        </div>
+                      </div>
+                    </div> -->
+                    <select [(ngModel)]="info.permissions" 
+                            #exam="ngModel"
+                            (change)="updatePermission(info.permissions)"
+                             class="form-control" required>
+                      <option selected="" value="">Select Permission</option>
+                      <!-- <option *ngFor="let p of info.permissions" value={{p}}>{{p}}</option> -->
+                      <option *ngFor="let p of permissions" [ngValue]="p.value">{{p.text}}</option>                      
+                    </select>
+                  </div>
+                  <!-- <div *ngIf="exam.invalid">select permission...</div> #exam is a reference variable which can access in this dom-->
+            </span></td>
+      <td>
+        <select [(ngModel)]="info.plants" (change)="updatePlants(info.plants)" class="form-control" required>
+    <option selected value="">Select Plants</option>
+    <!-- <option *ngFor="let p of info.permissions" value={{p}}>{{p}}</option> -->
+    <option *ngFor="let p of listOfPlants" [ngValue]="p.plantId">{{p.plantId}}-{{p.plantAlias}}</option>
+  </select>
+      </td>
+      <td><span>EmpId:{{info.empId}}</span></td>
+      <td>
+        <button type="button" class="btn btn-outline-dark" (click)="resetPassword()">RESET</button>
+      </td>
+    </tr>
+  </tbody>
+</table>

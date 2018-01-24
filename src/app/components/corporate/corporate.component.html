@@ -1,0 +1,85 @@
+<div class="container-fluid">
+    <div class="row ">
+
+        <div id="resultDiv">
+            <table style="max-width: 120%;margin-left: 10%;" class="row-border table table-condensed table-bordered table-custom-hf table-hover hover " name="vp_search_result">
+                <thead>
+                    <tr class="pointer">
+                        <th>Scale Ticket</th>
+                        <th>Customer</th>
+                        <th>Products</th>
+                        <th>Keywords & Severity</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="pointer" *ngFor="let info of auditInfoData" id="{{info.auditInfoId}}">
+                        <td>
+                            {{info.scaleTicket}}<span class="badge padd-4-LR pull-right">{{info.scoringStatusText.substring(0,1)}}</span>
+                            <small>
+                                <br />
+                                Type: <strong>{{info.scaleTicketType}}</strong><br />
+                                Dt: <span>{{info.ticketDate}}</span><br />
+                                <span>{{info.plant.name}}-{{info.plant.id}}</span>
+
+                            </small>
+                        </td>
+                        <td>
+                            {{info.sourceLocation}}
+                            <p><small>Addr: {{info.address}}<br />{{info.csz}}</small></p>
+                        </td>
+                        <td>
+                            <div *ngFor="let product of info.auditProductList">
+                                <small>
+                                    <span>{{product.productCode}}-{{product.productDesc}}<b class="pull-right">[Wt: {{product.net}}]</b></span><br />
+                                </small>
+                            </div>
+                        </td>
+                        <td>
+                            <p class="breakword"></p>
+                            <!-- <div class="progress">
+                                <div class="progress-bar progress-bar-striped active" #info.scaleTicket
+                                [ngClass]="setWidthColor(info.severityLevel)"
+                                     id="progress_{{info.scaleTicket}}"
+                                     role="progressbar"                     
+                                     [ngStyle]="{width: '{{info.scaleTicket}} px'}"
+                                     [attr.aria-valuemax]="100" 
+                                     [attr.aria-valuemin]="0" > 
+                                    {{info.severityLevel}}
+                                </div>
+                            </div> -->
+                            <p><ngb-progressbar type="{{setWidthColor(info.severityLevel)}}" [value]="info.setWidth" [striped]="true" [animated]="true"><i>{{info.severityLevel}}</i></ngb-progressbar></p>
+                        </td>
+                        <td>
+                            <div>
+                                <button class="btn btn-xs btn-primary" 
+                               
+                                (click)="openReviewModal(info)">Edit
+                             </button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+<!-- <ng-template #content let-c="close" let-d="dismiss">
+    <div class="modal-header">
+      <h4 class="modal-title">Modal title</h4>
+      <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+        <span aria-hidden="true">×</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <p>One fine body…</p>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Close</button>
+    </div>
+  </ng-template> -->
+  <ng-template #content>
+        <app-modal></app-modal>    
+  </ng-template>

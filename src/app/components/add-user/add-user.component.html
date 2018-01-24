@@ -1,0 +1,83 @@
+<div class="modal-header">
+  <h4 class="modal-title">Add User</h4>
+  <button type="button" class="close" aria-label="Close" (click)="closeModal()">
+      <span aria-hidden="true">×</span>
+    </button>
+</div>
+<div class="modal-body">
+  <div>
+    <form name="userForm" #userForm="ngForm" (ngSubmit)="addUser(userForm)">
+        <!-- <p>User Level</p>
+        <div class="row">
+          <div class="form-check">
+            <input type="radio" class="form-check-input" id="exampleChecK" [(ngModel)]="userLevel" name="userLevel" >
+            <label class="form-check-label" for="exampleCheck1">VP</label>
+          </div>
+          <div class="form-check">
+            <input type="radio" class="form-check-input" id="exampleCheck" [(ngModel)]="userLevel" name="userLevel" >
+            <label class="form-check-label" for="exampleCheck1">CUSTOMER</label>
+          </div>
+        </div> -->
+        
+      <div class="row">
+        <div class="col-sm-6">
+          <label>Name</label>
+          <!-- If ngForm is used, all the input fields which has [(ngModel)]="" must have an attribute name with a value or add ngModelOptions. -->
+          <!-- <input type="text"  [(ngModel)]="name" [ngModelOptions]="{standalone: true}" required> -->
+          <input type="text" [(ngModel)]="name" name="name" required>
+
+        </div>
+        <div class="col-sm-6">
+          <label>Email</label>
+          <input name="useremail" type="email" [(ngModel)]="email" required>
+        </div>
+      </div>
+
+      <div class="row">
+
+        <div class="col-sm-6">
+          <label>Password</label>
+          <input type="password" [(ngModel)]="password" name="userpassword" required>
+        </div>
+        <div class="col-sm-6">
+          <label>Confirm Password</label>
+          <input type="password" [(ngModel)]="confirmPassword" name="userconfirmPassword" required>
+        </div>
+      </div>
+
+      <div class="row">
+        <label>Permission(s)</label>
+        <select [(ngModel)]="permissions" name="permission" #exam="ngModel" (change)="updatePermission(permissions)" class="form-control"
+          required>
+             <option selected="" value="">Select Permission</option>
+           
+            <option *ngFor="let p of listOfPermissions" [ngValue]="p.value">{{p.text}}</option>                      
+          </select>
+
+
+        <label>Plant(s)</label>
+        <select [(ngModel)]="plants" (change)="updatePlants(plants)" name="plant" class="form-control" required>
+                <option selected value="">Select Plants</option>
+                <option *ngFor="let p of listOfPlants" [ngValue]="p.plantId">{{p.plantId}}-{{p.plantAlias}}</option>              
+          </select>
+      </div>
+
+      <!--  <div layout="row" class="input-row" ng-show="regCtrl.newUser.userLevel=='CU'">
+          <md-input-container flex>
+            <label>Address Id(s)</label>
+            <tags-input ng-model="regCtrl.newUser.addressIds" placeholder="Add addressId" use-strings="true" replace-spaces-with-dashes="false"
+              add-from-autocomplete-only="true" , ng-required="regCtrl.newUser.userLevel=='CU'">
+              <auto-complete source="regCtrl.loadAddressIds($query)" min-length="3" debounce-delay="200" max-results-to-show="50" , display-property="name"></auto-complete>
+            </tags-input>
+            <span class="text-muted">In order to enter multiple addresses, kindly hit Enter key after each address.</span>
+          </md-input-container>
+
+        </div> -->
+      <button type="submit" class="btn btn-outline-dark" [disabled]="!userForm.valid">Add</button>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <!-- <button type="submit" class="btn btn-outline-dark">Add</button> -->
+    <button type="button" class="btn btn-outline-dark" (click)="closeModal()">Cancel</button>
+
+  </div>

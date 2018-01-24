@@ -1,0 +1,57 @@
+<div class="modal-header">
+  <h4 class="modal-title">Review Audit Details</h4>
+  <button type="button" class="close" aria-label="Close" (click)="closeModal()">
+    <span aria-hidden="true">×</span>
+  </button>
+</div>
+<div class="modal-body">
+  <div class="row">
+    <div class="col-sm-6">
+      <ul class="list-group">
+        <li class="list-group-item">
+          <label for="scaleTicket">Scale Ticket:</label>
+          <h4 class="label label-info">{{selectedAuditData.scaleTicket}}</h4>
+          <br />
+        </li>
+        <li class="list-group-item text-info">
+          <label>Product (s):</label><br />
+        </li>
+        <li class="list-group-item" style="padding-left: 1px; padding-right: 1px;">
+          <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th class="text-center">Product Code</th>
+                  <th class="text-left">Description</th>
+                  <th class="text-center">Gross</th>
+                  <th class="text-center">Net</th>
+                </tr>
+              </thead>
+            <tbody>
+              <tr *ngFor="let list of selectedAuditData.auditProductList">
+                <td class="text-center">{{list.productCode}}</td>
+                <td class="text-left">{{list.productDesc}}</td>
+                <td class="text-center">{{list.gross}}</td>
+                <td class="text-center">{{list.net}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </li>
+      </ul>
+    </div>
+    <div class="col-sm-6">
+      <ngb-carousel>
+        <ng-container *ngFor="let slide of recommendedImages">
+          <ng-template ngbSlide [id]="slide.id">
+            <img [src]="slide.src" [alt]="img">
+            <!-- <div class="carousel-caption">
+              <h3>First slide label</h3>
+              <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+            </div> -->
+          </ng-template>
+        </ng-container>
+      </ngb-carousel>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="closeModal()">Close</button>
+  </div>
